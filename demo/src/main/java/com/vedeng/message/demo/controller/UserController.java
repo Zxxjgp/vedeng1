@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
@@ -118,7 +119,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/first")
-	public ModelAndView toDemo(HttpServletRequest request) {
+	public ModelAndView toDemo(HttpServletRequest request, HttpServletResponse resp) {
 		request.setAttribute("wewew","ewqeqweqwewq");
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("name", "jack");
