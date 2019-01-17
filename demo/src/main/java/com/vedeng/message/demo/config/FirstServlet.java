@@ -15,15 +15,12 @@ public class FirstServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwww");
-		//
 /*		response.sendRedirect("http://www.baidu.com");*/
-		
-		
 		System.out.println("请求首行信息");
 		String type = request.getMethod();
 		String url = request.getRequestURI();
+		System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"+request.getAttribute("gg"));
 		String protocol = request.getProtocol();
 		System.out.println("首行信息："+type+url+protocol);
 		
@@ -38,5 +35,6 @@ public class FirstServlet extends HttpServlet {
 			String key = enumer.nextElement();
 			System.out.println(key+"=="+request.getHeader(key));
 	    }
+		response.sendRedirect("/firstq");
 	}
 }

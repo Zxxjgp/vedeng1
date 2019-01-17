@@ -7,17 +7,19 @@ import com.vedeng.message.demo.model.Mo;
 import com.vedeng.message.demo.model.User;
 import com.vedeng.message.demo.service.impl.MessageServiceImpl;
 import com.vedeng.message.demo.service.impl.UserServiceImpl;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 功能描述
@@ -118,7 +120,7 @@ public class UserController {
 	 * @param mv
 	 * @return
 	 */
-	@RequestMapping(value = "/first")
+	@RequestMapping(value = "/firstq")
 	public ModelAndView toDemo(HttpServletRequest request, HttpServletResponse resp) {
 		request.setAttribute("wewew","ewqeqweqwewq");
 		ModelAndView mv = new ModelAndView();
@@ -129,10 +131,41 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(value = "put" , method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/first" , method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
 	public @ResponseBody Object edit(Mo vo1) {
 		JSONObject obj = new JSONObject();
 		obj.put("flag", true);
 		return obj;
 	}
+	
+	@RequestMapping(value = "/fileUpLoad", method = RequestMethod.POST)
+	public String fileUpload(@RequestParam("fileName") MultipartFile file){
+			if(file.isEmpty()){
+				return "false";
+			}
+			String fileName = file.getOriginalFilename();
+			int size = (int) file.getSize();
+			System.out.println(fileName + "-->" + size);
+			
+			String path = "D:/test" ;
+			File dest = new File(path + "/" + fileName);
+			if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
+				dest.getParentFile().mkdir();
+			}
+			try {
+				file.transferTo(dest); //保存文件
+				return "true";
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "false";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "false";
+			}
+		}
 }
+
+
+

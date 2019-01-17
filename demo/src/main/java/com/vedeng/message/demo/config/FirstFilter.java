@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 //整合过滤其（先进入过滤器）
-@WebFilter(filterName = "FirstFilter", urlPatterns = "/first")
+@WebFilter(filterName = "FirstFilter", urlPatterns = "/*")
 public class FirstFilter implements Filter {
 	@Override
 	public void destroy() {
@@ -17,6 +17,7 @@ public class FirstFilter implements Filter {
 	public void doFilter(ServletRequest arg0, ServletResponse arg1,
 	                     FilterChain arg2)
 			throws IOException, ServletException {
+		arg0.setAttribute("gg","nameijoijuoiuiiiiiiiiiiiiiiiiiii");
 		System.out.println("进入 Filter");
 		arg2.doFilter(arg0, arg1);
 		System.out.println("离开 Filter");
