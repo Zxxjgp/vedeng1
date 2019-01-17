@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vedeng.message.demo.dao.ReplyMessageDao">
+
+    <select id="getReplyMessage" resultType="com.vedeng.message.demo.model.ReplyMessage">
+        SELECT
+          tr.REPLY_ID AS replyId,
+          tr.REPLY_CONTENT AS replyContent,
+          tr.ADD_TIME AS addTime,
+          tr.REPLY_REPLY_ID AS replyReplyId,
+          tu.USER_NAME AS userName
+        FROM
+          t_repkly tr
+          LEFT JOIN t_user tu ON tr.CREATOR = tu.USER_ID
+        WHERE  1 = 1
+        <if test="messageId != null and messageId != ''">
+          AND  tr.MESSAGE_ID = #{ messageId }
+        </if>
+    </select>
+
+    <select id="findByReplyId" resultType="com.vedeng.message.demo.model.ReplyMessage" parameterType="java.lang.Integer">
+            SELECT
+              tr.REPLY_CONTENT AS replyContent,
+              tr.ADD_TIME AS ADDTIME,
+              tu.USER_NAME AS userName
+            FROM
+              t_repkly tr
+              LEFT JOIN t_user tu ON tr.CREATOR = tu.USER_ID
+              WHERE 1 = 1
+             <if test="replyReplyId != null and replyReplyId != ''">
+                AND tr.REPLY_REPLY_ID = #{replyReplyId}
+             </if>
+
+    </select>
+</mapper>

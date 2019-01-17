@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"  >
+<head>
+    <title>主页</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jqPaginator.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jqpage.js"></script>
+    <style type="text/css">
+        body {
+            padding: 20px;
+        }
+
+        .headLeft {
+            float: left;
+        }
+
+        .headRight {
+            padding-top: 40px;
+            padding-left: 340px;
+        }
+
+        .search {
+            margin-bottom: 10px;
+        }
+
+        .search .toolbar {}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand " href="http://localhost:8001/pages">后台管理系统</a>
+                    </div>
+                    <div class="navbar-right">
+                        <a class="navbar-brand" href="#">当前用户：<span th:text="${user}"></span></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row" style="padding-top:30px;">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">当前帖子</a>
+                 <table class="table table-bordered table table-hover" style="width:260px; border: 0px solid transparent !important;">
+                     <tr style="color:red">
+                         <th>title</th>
+                     </tr>
+                     <tr th:each="ms : ${message}">
+                         <td > <a th:href="@{'http://localhost:8001/message/getById/'+${ms.messageId}}" th:text="${ms.messageTitle}"></a></td>
+                 </table>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div>
+                <ol class="breadcrumb">
+                    <li><span class="glyphicon glyphicon-home"></span>&nbsp;<a href="#">主页</a></li>
+                    <li class="active"></li>
+                </ol>
+            </div>
+            <div style="background: red" align="center">
+                <h1>留言板系统</h1>
+            </div>
+
+           <div>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</div>
+
+            <!-- <p id="p1"></p> -->
+            <div>
+                <table id="list" border="1"></table>
+            </div>
+            <ul class="pagination" id="pagination1"></ul>
+            <!-- <p id="p2"></p> -->
+            <!--  <ul class="pagination" id="pagination2"></ul> -->
+            <table>
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>用户名</th>
+                </tr>
+                <tr th:each="ms:${message}">
+                    <td th:text="${ms.messageId}"></td>
+                    <td th:text="${ms.messageTitle}"></td>
+                </tr>
+                </thead>
+
+            </table>
+            <div>
+                <ul class="pagination" id="u1"></ul>
+            </div>
+
+            <div>
+                <ul class="paginationq" id="text"></ul>
+            </div>
+            <div>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</div>
+
+            <div>
+                <h1 class="testOne">.我是测试一号</h1>
+                <h1 class="testTwo">.我是测试二号</h1>
+                <h1 class="testThree">.我是测试三号</h1>
+            </div>
+
+
+
+            <div>
+                <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+                    <form class="form-horizontal m" id="form-user-add" enctype="[application/x-www-form-urlencoded,multipart/form-data,text/plain]">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标题：</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="messageTitle" name="messageTitle" placeholder="请输入标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">内容：</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" id="messageContent" name="messageContent" placeholder="请输入内容">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Country</label>
+                            <div class="col-lg-5">
+                                <select class="form-control" id="messageType" name="messageType" th:id="messageType">
+                                    <option value="">-- 请选择 --</option>
+                                    <option value="0" >生活</option>
+                                    <option value="1">求职</option>
+                                    <option value="2">医疗</option>
+                                    <option value="3">健康</option>
+                                    <option value="4">求职</option>
+                                    <option value="5">租房</option>
+                                    <option value="6">二手</option>
+                                    <option value="7">医疗器械</option>
+                                    <option value="8">兼职</option>
+                                    <option value="9">求医问药</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-control-static col-sm-offset-9">
+                                <button type="button" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div align="center" style="padding-top: 200px">
+                Copyright © 2018-2019 Bert
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    $(function () {
+
+/*        $(".pagination").jqPaginator({
+            totalPages: [[${size}]]/5,
+            visiblePages: 5,
+            currentPage: 1,
+            first: '<li class="first"><a href="javascript:void(0);">第一页</a></li>',
+            prev: '<li class="prev"><a href="javascript:void(0);">上一页</a></li>',
+            next: '<li class="next"><a href="javascript:void(0);">下一页</a></li>',
+            last: '<li class="last"><a href="javascript:void(0);">最后一页</a></li>',
+            page: '<li class="page"><a href="javascript:void(0);">{{page}}</a></li>',
+            onPageChange: function (num) {
+                $('#text').html('当前第' + num + '页');
+            }
+        });*/
+
+
+        $.jqPaginator("#pagination1", {
+            totalPages: [[${size}]]/5,
+            visiblePages: 5,
+            currentPage: 1,
+            onPageChange: function (num, type) {
+                $.get('/list', { 'page': num }, function (returnData) {
+                    htmlcontent = '';
+                    $.each(returnData, function (index, item) { //遍历返回的json
+                        htmlcontent+= '<tr><td>' + item.messageId + '</td>';
+                        htmlcontent+= '<td>' + item.messageTitle + '</td>';
+                        htmlcontent+= '<td><button class="btn btn-warning" onclick="Edit(' + item.messageId + ' );">修改</button>';
+                        htmlcontent+= '<button class="btn btn-warning" onclick="Edit(' + item.messageId + ' );">删除</button></td></tr>';
+                    });//each end
+                    $("#list").empty().append(htmlcontent);
+                    $('#pagination1').jqPaginator('option', {
+                        totalPages: [[${size}]]/5,
+                        visiblePages: 5,//每页记录条数
+                        currentPage: num
+                    });
+                })
+            }
+        });
+    })
+    
+    
+    function Edit(data ) {
+        alert(data)
+    }
+/*
+
+    var sum = $("#sum").val(); //获取共多少条数据
+    $('#pagination0').jqPaginator({
+        totalPages:Math.ceil(sum/5), //共有多少页
+        visiblePages:5, //最多显示几页
+        currentPage:1, //当前页
+        first: '<li class="first"><a href="javascript:void(0);">First</a></li>',
+        prev: '<li class="prev"><a href="javascript:void(0);">Previous</a></li>',
+        next: '<li class="next"><a href="javascript:void(0);">Next</a></li>',
+        last: '<li class="last"><a href="javascript:void(0);">Last</a></li>',
+        page: '<li class="page"><a href="javascript:void(0);">{{page}}</a></li>',
+        onPageChange:function(num){  //这里的num 返回的是当前第几页
+            $.ajax({
+                url:"/admin/ajaxlist",
+                type:"post",
+                data:{num:num}, //把当前的页数num传到后台
+                success:function(data){
+                    $("#tab").html("");
+                    for(var i=0;i<data.results.length;i++){
+                        $("#tab").append("<tr class=\"text-c\"><td><input type=\"checkbox\" value=\"\" name=\"\"></td><td>"+data.results[i].id+"</td>" +
+                            "<td class=\"text-l\"><u style=\"cursor:pointer\" class=\"text-primary\" title=\"查看\">"+data.results[i].title+"</u></td>" +
+                            "<td>"+data.results[i].categaryname+"</td><td>"+data.results[i].author+"</td><td>"+data.results[i].source+"</td>" +
+                            "<td>"+data.results[i].timer+"</td><td><img src=\"/uploads/"+data.results[i].pic+"\" width=\"40\" height=\"40\"></td>" +
+                            "<td class=\"f-14 td-manage\"><a style=\"text-decoration:none\" class=\"ml-5\" href=\"http://127.0.0.1:3000/admin/article-edit?id="+data.results[i].id+"\" title=\"编辑\">" +
+                            "<i class=\"Hui-iconfont\">&#xe6df;</i></a><a style=\"text-decoration:none\" class=\"ml-5\" onClick='del(this,"+data.results[i].id+")' href=\"javascript:;\" title=\"删除\">" +
+                            "<i class=\"Hui-iconfont\">&#xe6e2;</i></a></td></tr>");
+                    }
+                }
+            });
+        }
+    });
+
+    $('#id').jqPaginator({
+        totalPages: 100,
+        visiblePages: 10,
+        currentPage: 1,
+        onPageChange: function (num, type) {
+            $('#text').html('当前第' + num + '页');
+        }
+    });
+
+
+    //
+    var if_fistime=true;
+    $(".pagination").jqPaginator({
+        totalPages:[[${totalPages}]],
+        visiblePages:10,
+        currentPage: [[${currentPage}]],
+        first: '<li class="first"><a href="javascript:void(0);">第一页</a><>',
+        prev: '<li class="prev"><a href="javascript:void(0);">上一页</a><>',
+        next: '<li class="next"><a href="javascript:void(0);">下一页</a><>',
+        last: '<li class="last"><a href="javascript:void(0);">最后一页</a><>',
+        page: '<li class="page"><a href="javascript:void(0);">{{page}}</a><>',
+        /!* 当页码发生变化的时候执行 *!/
+        onPageChange:function(num){
+            if(if_fistime){
+                if_fistime=false;
+            }else if(!if_fistime){
+                changePage(num);
+            }
+        }
+    })
+    }
+    function changePage(num){
+        $("#pageNum").val(num);
+        $("#searchForm").submit();
+    }
+*/
+
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       $(".testOne").click(function () {
+           alert("我是测试");
+           $.ajax({
+               type:"PUT",
+               url: "http://localhost:8001/put",
+               data:{
+                   "id":"12",
+                   "name":"秦朗",
+               },
+               async: false,
+               success:function(result){
+                    alert(result.flag)
+               }
+           });
+       });
+    });
+</script>
+<!--<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            var dataJson = $("#form-user-add").serialize();
+            var  messageTitle = $("#messageTitle").val();
+            var  messageContent = $("#messageContent").val();
+            var  messageType = $("#messageType").val();
+            var date = {"messageTitle":messageTitle,
+                "messageContent":messageContent,
+                "messageType":messageType
+            };
+            alert(messageTitle)
+            $.ajax({
+                type:"POST",
+                url: "http://localhost:8001/message/addMessage",
+                contentType: 'application/json',
+                async: false,
+                data : JSON.stringify(date),
+                success:function(result){
+                    if(result == "success"){
+                        alert("发帖成功");
+                        clears();
+                    }
+                    else{
+                        alert("发帖失败失败");
+                    }
+                }
+            });
+        });
+    });
+
+    function clears() {
+        $("#messageTitle").val("");
+        $("#messageContent").val("");
+        $("#messageType").val("");
+    }
+</script>-->
+</html>

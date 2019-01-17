@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"  >
+<head>
+    <meta charset="utf-8">
+    <title>留言</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid" id="LG" >
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="carousel slide" id="carousel-805498">
+                <ol class="carousel-indicators">
+                    <li class="active" data-slide-to="0" data-target="#carousel-805498">
+                    </li>
+                    <li data-slide-to="1" data-target="#carousel-805498">
+                    </li>
+                    <li data-slide-to="2" data-target="#carousel-805498">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img alt="" src="/image/q.jpg" style="height: 200px"/>
+                        <div class="carousel-caption">
+                            <h4>
+                                生活
+                            </h4>
+                            <p>
+                                不要用上坟的心情对待生活，若如此，那座坟里埋葬的不是别人的身躯，是你，而你只是作为一个浪费资源的消耗者，你活着就是对别人的折磨，所以当你没有勇气选择死亡时，那就好好的面对生活，学会坚强，正确的看待回忆，而不是因为忧伤密布，原本蔚蓝的天空在你的眼眸之中不再自由。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img alt="" src="/image/w.jpg" style="height: 200px"/>
+                        <div class="carousel-caption">
+                            <h4>
+                                冲浪
+                            </h4>
+                            <p>
+                                冲浪是以海浪为动力，利用自身的高超技巧和平衡能力，搏击海浪的一项运动。运动员站立在冲浪板上，或利用腹板、跪板、充气的橡皮垫、划艇、皮艇等驾驭海浪的一项水上运动。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img alt="" src="/image/e.jpg" style="height: 200px"/>
+                        <div class="carousel-caption">
+                            <h4>
+                                自行车
+                            </h4>
+                            <p>
+                                以自行车为工具比赛骑行速度的体育运动。1896年第一届奥林匹克运动会上被列为正式比赛项目。环法赛为最著名的世界自行车锦标赛。
+                            </p>
+                        </div>
+                    </div>
+                </div> <a data-slide="prev" href="#carousel-805498" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-805498" class="right carousel-control">›</a>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">网站名</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">主页</a></li>
+                <li><a href="#">页面</a></li>
+                <li><a href="#">测试页面</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2 th:text="${message.messageTitle}">标题</h2>
+            <h5>描述:</h5>
+            <p th:text="${message.messageContent}">提起某个字会想起某个人，一座城市有那么重的回忆。对不起，我还没有学会不触景伤情。熟视无睹，视而不见。事不关己，对不起我还做不到。谢谢你曾给的礼物很美好。同样很残忍。我不是一个无情的人，有些事情非要逼我放下。我不想和你说再见，因为在线就会再也不见。我不想听你说离别，离了之后你属于别人，我曾经以为最坚强的后盾，是前一个，过客。后来时间慢慢告诉我，原来你是我生命中最坚强的后盾。逃不掉我慢慢学会沉默，慢慢学会承受，慢慢学会面对生活中所有的痛楚。唯一想逃的就是你的名字……再深刻的回忆，在脑海浬，你的名字的大写字母开头。那天晚上我会念著你的名字说晚安，即使你再听不到。望著星空说我想你。我的爱人我最坚强的后盾我的过客，再见。我要忘掉一切从新开始!</p>
+            <p th:text="'创建时间'+${message.addTimes}"></p>&nbsp;浏览次数：<span th:text="${message.messageVisits}+'&nbsp;作者'+${message.creatorName}"></span>
+            <h3>评论</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <form class="form-horizontal m" id="sub"  enctype="[application/x-www-form-urlencoded,multipart/form-data,text/plain]">
+                    <input  type="text" id="messageId" name="messageId" th:value="${message.messageId}"  style="display:none" >
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">标题：</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" id="replyContent" name="replyContent" placeholder="请输入留言内容">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-control-static col-sm-offset-9">
+                            <button type="button" class="btn btn-primary">提交</button>
+                        </div>
+                    </div>
+                </form>
+
+            </ul>
+            <hr class="hidden-sm hidden-md hidden-lg">
+        </div>
+        <div class="col-sm-8">
+            <h2>标题</h2>
+            <br>
+            <h4>标题</h4>
+        </div>
+    </div>
+</div>
+
+<div class="footer navbar-fixed-bottom text-center" style="margin-bottom:0">
+    <p>版权所有：Create By Bert 2018--2019 技术支持请联系12456789</p>
+</div>
+<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            var  messageId = $("#messageId").val();
+            alert(messageId)
+            var  replyContent = $("#replyContent").val();
+            var date = {"messageId":messageId,
+                "replyContent":replyContent
+            };
+            alert(replyContent)
+            $.ajax({
+                type:"POST",
+                url: "http://localhost:8001/eply/message/add",
+                contentType: 'application/json',
+                async: false,
+                data : JSON.stringify(date),
+                success:function(result){
+                    if(result == "success"){
+                        alert("发帖成功");
+                        clears();
+                    }
+                    else{
+                        alert("发帖失败失败");
+                    }
+                }
+            });
+        });
+    });
+
+    function clears() {
+
+        $("#replyContent").val("");
+    }
+</script>
+</body>
